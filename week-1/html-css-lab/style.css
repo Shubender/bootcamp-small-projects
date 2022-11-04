@@ -1,0 +1,66 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+}
+
+header {
+    position: relative;
+    padding: 30px;
+    border: 1px gray dashed;
+}
+
+#logo {
+    height: 50px;
+    width: 250px;
+    
+}
+
+#menu {
+    position: absolute;
+    top: 30px;
+    right: 30px;
+    height: 50px;
+    width: 50px;
+    background: pink;
+}
+
+/* #background {
+    object-fit: cover;
+} */
+
+#text {
+    background: rgb(213, 208, 208);
+    position: relative;
+    height: 20vh;
+    margin: 0 auto;
+}
+
+p {
+    position: absolute;
+}
+
+p:nth-child(1) {
+    
+    left: 20%;
+}
+p:nth-child(2) {
+    left: 20%;
+    top: 80px;
+    
+}
+p:nth-child(3) {
+    right: 20%;
+}
+
+p:nth-child(4) {
+    right: 20%;
+    top: 80px;
+}
+
+footer {
+    background-color: gray;
+    color: white;
+    position: absolute;
+    padding: 5px;
+    bottom: 0;
+}
