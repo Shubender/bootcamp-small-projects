@@ -18,36 +18,39 @@ each(["a", "b"], function (val, idx) {
     console.log("The value of item " + idx + " is " + val);
 });
 
+
+
 // my code above:
 
 function myFunc(first, second) {
     console.log(first, second);
 }
 
-function each(myData, myFunc) {
-    if (logType(myData) === "object") {
+function each(myData, myFuncParam) {
+    if (typeof myData === "object" && !Array.isArray(myData)) {
         for (const property in myData) {
-            myFunc();
+            myFuncParam(myData[property], property);
         }
+        console.log("object is work well!");
     }
 
     if (Array.isArray(myData)) {
+        for (const element of myData) {
+            myFunc(element, myData.indexOf(element));
+        }
+        console.log("array is work well!");
     }
 }
 
 const myObj = {
-    a: 1,
-    b: 2,
+    a: 10,
+    b: 20,
 };
 
 const myArr = ["a", "b"];
 
-myFunc(myObj);
-myFunc(myArr);
-
-
-
-
+each(myObj, myFunc);
+each(myArr, myFunc);
 
 
 
