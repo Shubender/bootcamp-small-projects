@@ -4,23 +4,6 @@
 
 // If the first parameter is an array, it should loop over the array's elements and call the callback for each one. The array element should be the first parameter passed to the callback and the index should be the second.
 
-each(
-    {
-        a: 1,
-        b: 2,
-    },
-    function (val, name) {
-        console.log("The value of " + name + " is " + val);
-    }
-); // logs 'the value of a is 1' and 'the value of b is 2'
-
-each(["a", "b"], function (val, idx) {
-    console.log("The value of item " + idx + " is " + val);
-});
-
-
-
-// my code above:
 
 function myFunc(first, second) {
     console.log(first, second);
