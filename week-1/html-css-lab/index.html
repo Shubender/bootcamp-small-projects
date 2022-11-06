@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -7,38 +8,60 @@
     <title>html-css-lab</title>
     <link rel="stylesheet" href="style.css" />
 </head>
+
 <body>
     <header>
-        <img id="logo" src="./assets/spiced.png" alt="Spiced Logo">
-        <img id="menu" src="./assets/hamburgermenu.svg" alt="Menu">
+        <img class="logo" src="./assets/spiced.png" alt="Spiced Logo">
+        <img class="menu" src="./assets/hamburgermenu.svg" alt="Menu">
     </header>
 
-    <div>
-        <img id="background" src="./assets/spices.jpg" alt="boxis with spices">
-    </div>
+    <main>
+        <section class="first-section">
+            <div>
+                <img class="background" src="./assets/spices.jpg" alt="boxis with spices">
+                <h2 class="welcome-text">Welcome to SPICED and the Future.</h2>
+                <button><strong>Get Started</strong></button>
+            </div>
 
-    <div id="text">
-        <p><b>Best-in-class Features</b><br>
-        Nobody does this stuff better than us.<br>
-        You can bet your life on that.
-        </p>
-        <p><b>An Acquired Taste</b><br>
-        It may take a little while for you to<br>
-        warm up to us but once you do you<br>
-        will never want to switch.
-        </p>
-        <p><b>Reliable Service</b><br>
-        You can count on us to help you<br>
-        whenever you need it. We're talking<br>
-        round the clock service.
-        <p><b>No Limits</b><br>
-        There are absolutely no limits. We do<br>
-        not throttle. We do not cap.
-        </p>
-    </div>
+        </section>
+
+        <section class="second-section">
+            <article class="art">
+                <img src="./assets/cat.svg" alt="Cat">
+                <h2>Best-in-class Features</h2>
+                <p>Nobody does this stuff better than us.<br>
+                    You can bet your life on that.</p>
+                <span></span>
+            </article>
+            <article class="art">
+                <img src="./assets/swim.svg" alt="Cat">
+                <h2>An Acquired Taste</h2>
+                <p>It may take a little while for you to<br>
+                    warm up to us but once you do you<br>
+                    will never want to switch.</p>
+                <span></span>
+            </article>
+            <article class="art">
+                <img src="./assets/world.svg" alt="Cat">
+                <h2>Reliable Service</h2>
+                <p>You can count on us to help you<br>
+                    whenever you need it. We're talking<br>
+                    round the clock service.</p>
+                <span></span>
+                </article>
+            <article class="art">
+                <img src="./assets/columns.svg" alt="Cat">
+                <h2>No Limits</h2>
+                <p>There are absolutely no limits. We do<br>
+                    not throttle. We do not cap.</p>
+                <span></span>
+            </article>
+        </section>
+    </main>
 
     <footer>
-        <h4>&#169; 2016 Some Organization</h4>
+        <span>&#169; 2016 Some Organization</span>
     </footer>
 </body>
+
 </html>
