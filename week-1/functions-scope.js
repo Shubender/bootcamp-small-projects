@@ -60,17 +60,15 @@ waitThenRun(myFunc);
 // the number by 10 however many times it takes to get a number that is greater than or equal to 1000000 and return that.
 
 function multiplyTen(number) {
-    if (number <= 0 || (number !== number))
-    {
-        return 'ERROR';
-    } else if(number >= 1000000) {
+    if (number <= 0 || number !== number) {
+        return "ERROR";
+    } else if (number >= 1000000) {
         return number;
     } else {
-        for(;number < 1000000;)
-        {
+        for (; number < 1000000; ) {
             number *= 10;
         }
-         console.log('Result:', number);
+        return number;
     }
 }
 
