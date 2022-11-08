@@ -19,32 +19,29 @@
 
 // doSomethingOnEachPaint();
 
-
-const headlines = document.getElementById('headlines');
+const headlines = document.getElementById("headlines");
 let firstLink = document.querySelector("a");
 
 let widthOfHeadlines = headlines.offsetWidth;
 
-let currentLeftValue = widthOfHeadlines; /* initally set to the width of headlines. will be changed in moveLeft function */
+let currentLeftValue =
+    widthOfHeadlines; /* initally set to the width of headlines. will be changed in moveLeft function */
 function moveLeft() {
+    if (headlines.offsetLeft + firstLink.offsetWidth < 0) {
+        headlines.removeChild(firstLink);
+        headlines.appendChild(firstLink);
+        firstLink = document.querySelector("a");
+        currentLeftValue = 0;
+        headlines.style.left = currentLeftValue + "px";
+    }
     requestAnimationFrame(() => {
-
-        if (headlines.offsetLeft + firstLink.offsetWidth < 0){
-            headlines.removeChild(firstLink);
-            headlines.appendChild(firstLink);
-            firstLink = document.querySelector("a");
-            currentLeftValue = 0;
-            headlines.style.left = currentLeftValue + "px";
-        }
-
         headlines.style.left = currentLeftValue + "px";
         currentLeftValue--;
         moveLeft();
-
     });
 }
 
-// Check every time your function is called if the sum of headlines.offsetLeft and firstLink.offsetWidthis 
+// Check every time your function is called if the sum of headlines.offsetLeft and firstLink.offsetWidthis
 // smaller then 0
 
 // if it is smaller than 0:
