@@ -1,0 +1,16 @@
+body {
+    background-color: aquamarine;
+}
+
+label {
+    position: absolute;
+    left: 26%;
+    top: 22%;
+}
+
+textarea {
+    position: absolute;
+    background-color: aqua;
+    left: 25%;
+    top: 25%;
+}
