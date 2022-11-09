@@ -1,0 +1,18 @@
+.big-square {
+    position: absolute;
+    height: 200px;
+    width: 200px;
+    background-color: yellow;
+    top: 50px;
+    left: 50px;
+}
+
+
+.small-square {
+    position: absolute;
+    height: 50px;
+    width: 50px;
+    background-color: lightcoral;
+    top: 50px;
+    left: 50px;
+}
