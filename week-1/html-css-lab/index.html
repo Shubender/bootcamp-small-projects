@@ -7,12 +7,23 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>html-css-lab</title>
     <link rel="stylesheet" href="style.css" />
+    <script defer src="main.js"></script>
 </head>
 
 <body>
+    <div class="backdrop hidden"></div>
     <header>
         <img class="logo" src="./assets/spiced.png" alt="Spiced Logo">
         <img class="menu" src="./assets/hamburgermenu.svg" alt="Menu">
+        <nav class="side-bar hidden">
+            <img class="close-button" src="./assets/cross.svg" alt="Close Button">
+            <a href="http://" target="_blank" rel="noopener noreferrer">Settings</a>
+            <a href="http://" target="_blank" rel="noopener noreferrer">Pricing</a>
+            <a href="http://" target="_blank" rel="noopener noreferrer">Upgrade</a>
+            <a href="http://" target="_blank" rel="noopener noreferrer">Subsribe</a>
+            <a href="http://" target="_blank" rel="noopener noreferrer">Log out</a>
+        </nav>
+
     </header>
 
     <main>
@@ -48,7 +59,7 @@
                     whenever you need it. We're talking<br>
                     round the clock service.</p>
                 <span></span>
-                </article>
+            </article>
             <article class="art">
                 <img src="./assets/columns.svg" alt="Cat">
                 <h2>No Limits</h2>
