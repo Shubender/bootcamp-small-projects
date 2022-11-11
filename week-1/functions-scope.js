@@ -28,6 +28,11 @@ console.log(sum(5, 10, 15, 100, 200)); //330
 
 //I try put code in function but both console.log work in one moment
 
+// function waitThenRun(callback) {
+//     setTimeout(callback, 1500);
+// }
+
+
 function waitThenRun(someFunc) {
     setTimeout(someFunc("Hello!"), 1500);
     setTimeout(someFunc("Goodbye!"), 3000);
