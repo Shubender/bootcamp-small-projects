@@ -1,0 +1,42 @@
+* {
+    margin: 0;
+    box-sizing: border-box;
+    background-color: blueviolet;
+    font-size: 32px;
+}
+
+body {
+    width: 100%;
+    min-width: 10vh;
+}
+
+#container {
+    width: 90%;
+    height: 1000px;
+    background-color: antiquewhite;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 10px;
+}
+
+.item {
+    width: 100px;
+    height: 100px;
+    border: 3px solid black;
+    background-color: green;
+}
+
+.first {
+    order: 1;
+    flex-shrink: 7;
+}
+
+.third {
+    order: 0;
+    flex-grow: 3;
+}
+
+.seventh {
+    order: 0;
+}

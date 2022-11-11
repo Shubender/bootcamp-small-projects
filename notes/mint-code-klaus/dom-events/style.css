@@ -1,0 +1,46 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+}
+
+body {
+    position: relative;
+    background-color: grey;
+    overflow-x: hidden;
+    font-family: Arial, Helvetica, sans-serif;
+    user-select: none;
+}
+
+h1 {
+    text-align: right;
+    padding: 2vh;
+    color: black;
+}
+
+button {
+    position: absolute;
+    top: -80px;
+    font-weight: bold;
+    font-size: 30px;
+}
+
+.container {
+    position: absolute;
+    top: 35vh;
+    padding-left: 20px;
+}
+
+.track {
+    width: 100vw;
+    height: 100px;
+    display: flex;
+    align-items: center;
+    background-color: royalblue;
+    margin-bottom: 5px;
+}
+
+.food {
+    font-size: 40px;
+    padding: 10px;
+    position: absolute;
+}
