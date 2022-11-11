@@ -1,0 +1,28 @@
+/* Create an HTML document with three elements in the <body> tag: a <header> element, a <main> element, and a <footer> element. The <body> should be made a flex container and have its min-height set to 100vh so it fills the browser window. The <header> element should have a solid background color and be 70 pixels tall. The <footer> element should have a solid background color and be 30 pixels tall. The <main> element should fill the remainder of the available space. */
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    display: flex;
+    min-height: 100vh;
+    flex-direction: column;
+}
+
+header {
+    background-color: #ffa600;
+    height: 70px;
+}
+
+main {
+    background-color: #929292;
+    height: 400px;
+}
+
+footer {
+    background-color: #ffbfcb;
+    height: 30px;
+}
