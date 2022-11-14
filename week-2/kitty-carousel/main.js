@@ -12,7 +12,7 @@ let transition = false;                                 //for bug with transitio
 
 function moveImages() {
     timeOutID = setTimeout(() => {
-        transition = true;                              //for bug with transition
+        
         imagesArr[index].classList.remove("onscreen");
         imagesArr[index].classList.add("hidden-left");
         dots[index].classList.remove("selected");
@@ -28,17 +28,23 @@ moveImages();
 
 document.addEventListener('transitionend', (event) => {
     const imageElement = event.target;
-    transition = false;                                 //for bug with transition
+    transition = false;                           
     if (imageElement.classList.contains("hidden-left")) {
         imageElement.classList.remove("hidden-left");
     }
 });
 
+document.addEventListener("transitionstart", () => {
+    transition = true;                           
+});
 
-for (let i = 0; i <= dots.length; i++) {
+
+for (let i = 0; i < dots.length; i++) {
     dots[i].addEventListener("click", () => {
         console.log("click nav:", i + 1);
-
+        if (transition === true || i === index) {
+            return;
+        }
         clearTimeout(timeOutID);
         dots[index].classList.remove("selected");
         imagesArr[index].classList.remove("onscreen");
@@ -49,10 +55,6 @@ for (let i = 0; i <= dots.length; i++) {
 
         moveImages();
     });
-
-    // if (transition === false) {                         //for bug with transition
-
-    // }
 }
 
 
