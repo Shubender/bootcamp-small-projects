@@ -1,0 +1,31 @@
+/* Create an HTML document with three elements in the <body> tag: a <header> element, a <main> element,
+ and a <footer> element. The <body> should be have its display property set to grid and
+  its min-height set to 100vh so it fills the browser window. The <header> and <footer> elements should have 
+  solid backgrounds. Set new grid properties on the <body> element so that the <header> element is 70 pixels tall,
+   the <footer> element is 30 pixels tall, and the <main> element fills the remaining space. */
+
+
+* {
+    box-sizing: border-box;
+    padding: 0;
+    margin: 0;
+}
+
+body {
+    display: grid;
+    min-height: 100vh;
+    grid-template-rows: 70px 1fr 30px;
+
+}
+
+header {
+    background-color: #ffa600;
+}
+
+main {
+    background-color: #929292;
+}
+
+footer {
+    background-color: #ffbfcb;
+}
