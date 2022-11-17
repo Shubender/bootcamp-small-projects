@@ -36,13 +36,10 @@ function askForNumber() {
 function translateNumberToGerman() {
     try {
         const getNum = askForNumber();
-        
-        if (getNum >= 0 && getNum <= 10) {
-            const index = getNum - 1;
-            console.log("German number:", germanNums[index]);
-            alert("German number: " + germanNums[index]);
-            return germanNums[index].toString();
-        }
+        const index = getNum - 1;
+        console.log("German number:", germanNums[index]);
+        alert("German number: " + germanNums[index]);
+        return germanNums[index].toString();
     } catch (error) {
         console.log(error.name, error.message);
         translateNumberToGerman();
