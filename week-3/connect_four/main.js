@@ -4,14 +4,18 @@ let holesEl = document.getElementsByClassName("hole");
 const restartGameButton = document.querySelector(".restartGameButton");
 const finalRestart = document.querySelector(".finalRestart");
 const resultWindow = document.querySelector(".resultWindow");
-const board = document.querySelector("#board");
 let winText = document.querySelector(".winText");
+
+//features...
+
+let indicateColWin = 0;
+
+//directed by Robert B. Weide
 
 let playerMove = 1;
 let numberOfColums = 7;
 let numberOfRows = 6;
 //let numToWin = 4;
-//let gameResult = '';
 let colorWin = '';
 
 let holes = [
@@ -23,11 +27,9 @@ let holes = [
     0, 0, 0, 0, 0, 0,  // sixth column
     0, 0, 0, 0, 0, 0,  // seventh column
 ];
-console.log(holes);
 
 restartGameButton.addEventListener("click", restartGame);
 finalRestart.addEventListener("click", restartGame);
-
 
 for (let i = 0; i < columns.length; i++) {
     columns[i].addEventListener("click", () => {
@@ -43,7 +45,7 @@ for (let i = 0; i < columns.length; i++) {
 
             if (playerMove === 1) {
                 colorWin = 'RED';
-            }else if (playerMove === 2) {
+            } else if (playerMove === 2) {
                 colorWin = 'GREEN';
             }
 
@@ -53,17 +55,15 @@ for (let i = 0; i < columns.length; i++) {
                 for (const element of columns) {
                     element.classList.add('winShake');
                 }
-                //board.classList.add('winShake');
-                setTimeout(restartGame, 5000);          
+                setTimeout(restartGame, 5000);
             } else if (isDraw) {
-                //console.log('This is a DRAW!');
                 winText.innerHTML = 'You got a DRAW!';
                 resultWindow.classList.remove('hidden');
-                setTimeout(restartGame, 5000);  
+                setTimeout(restartGame, 5000);
             }
             if (playerMove === 1) {
                 playerMove = 2;
-            }else if (playerMove === 2) {
+            } else if (playerMove === 2) {
                 playerMove = 1;
             }
         }
@@ -77,23 +77,21 @@ function fillColomn(i) {
     for (let j = startInd; j < endInd; j++) {
         if (holes[j] === 0) {
             holes[j] = playerMove;
-            console.log(holes);
             holesEl[j].classList.add('player' + playerMove);
-            return { success: true, filledInd: j};
+            return { success: true, filledInd: j };
         }
     }
-    //return { success: false};
+    return { success: false };
 }
 
 function checkColumnWin(i) {
-    //console.log('test checkColumnWin');
-    const startIdx = i * numberOfRows; // columnIdx multiplies by the number of rows;
-    const endIdx = startIdx + numberOfRows; // startIdx + number of rows
+    const startIdx = i * numberOfRows;
+    const endIdx = startIdx + numberOfRows;
     let countChips = 0;
     let lastChip;
 
     for (let j = startIdx; j < endIdx; j++) {
-        
+
         if (holes[j] === 0) {
             return false;
         }
@@ -105,25 +103,26 @@ function checkColumnWin(i) {
         }
 
         if (countChips === 4) {
-            //console.log('Player ' + holes[j] + ' WIN' + ' with Columns!');
+            indicateColWin = j - 4;
+            for (; j > indicateColWin; j--) {
+                holesEl[j].classList.remove('player1');
+                holesEl[j].classList.remove('player2');
+                holesEl[j].classList.add('blink');
+            }
             return true;
         }
-
     }
     return false;
 }
 
-
 function checkForRowWin(filledInd) {
-    //console.log('test checkForRowWin: ', filledInd);
     const startInd = filledInd % numberOfRows;
-    //console.log('startRow: ', startInd);
     const endInd = numberOfColums * numberOfRows;
     let countChips = 0;
     let lastChip;
 
     for (let j = startInd; j < endInd; j += numberOfRows) {
-        
+
         if (holes[j] === 0) {
             countChips = 0;
         } else if (holes[j] !== lastChip) {
@@ -132,9 +131,7 @@ function checkForRowWin(filledInd) {
         } else {
             countChips++;
         }
-
         if (countChips === 4) {
-            //console.log('Player ' + holes[j] + ' WIN ' + ' with Rows!');
             return true;
         }
     }
@@ -146,8 +143,7 @@ function checkForDiagonalWin() {
         const hasWin = winIndices[i].every(winIndex => {
             return holes[winIndex] === playerMove;
         });
-        if (hasWin === true){
-            //console.log('Player ' + holes[i] + ' WIN ' + ' with Diag!');
+        if (hasWin === true) {
             return true;
         }
     }
@@ -161,21 +157,20 @@ function checkForDraw(arr) {
     }
 }
 
-
 function restartGame() {
-    for (let i = 0; i < holes.length; i++) {    // holes
+    for (let i = 0; i < holes.length; i++) {
         holes[i] = 0;
-        holesEl[i].classList.remove('player1'); //classes
+        holesEl[i].classList.remove('player1');
         holesEl[i].classList.remove('player2');
-    }    
-    colorWin = '';                              // playerToWin
-    //gameResult = '';                            // gameResults
-    playerMove = 1;                             //playerMove
+        holesEl[i].classList.remove('blink');
+    }
+    colorWin = '';
+    playerMove = 1;
     resultWindow.classList.add('hidden');
     for (const element of columns) {
         element.classList.remove('winShake');
     }
-    return;      
+    return;
 }
 
 
