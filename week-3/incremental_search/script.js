@@ -10,6 +10,11 @@
 
     let inputResult;
 
+
+    //need global index
+    //change style - add class, remove class
+    //
+
     input
         .on("input", function () {
             // we pass the value from the input field
@@ -29,6 +34,7 @@
         .on("keydown", function (e) {
             // this is gonna be implemented later
             // this is to navigate via arrow keys
+            e.keyCode
         });
 
     // gets the value from the input field
