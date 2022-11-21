@@ -1,33 +1,36 @@
 
 
-const headlines = $("#headlines");    //document.getElementById("headlines");
-console.log('headlines:', headlines);
+const headlines = $("#headlines"); //document.getElementById("headlines");
+console.log("headlines:", headlines);
 
-let firstLink = $("a").first(); //document.querySelector("a");
-console.log('firstLink:', firstLink);
-
-let widthOfHeadlines = headlines.outerWidth();     //headlines.offsetWidth;
-console.log("widthOfHeadlines:", widthOfHeadlines);
-
-let currentLeftValue = widthOfHeadlines; 
-let id;
+let firstLink; //document.querySelector("a");
+console.log("firstLink:", firstLink);
 
 const ticker = $("#ticker"); //document.getElementById("ticker");
 console.log("ticker:", ticker);
 
+let widthOfHeadlines = ticker.outerWidth(); //headlines.offsetWidth;
+console.log("widthOfHeadlines:", widthOfHeadlines);
+
+let currentLeftValue = widthOfHeadlines;
+let id;
+
 function moveLeft() {
-    if (headlines.offsetLeft + firstLink.offsetWidth < 0) {
-        //headlines.remove(firstLink);         //headlines.removeChild(firstLink);
-        //headlines.append(firstLink);         //headlines.appendChild(firstLink);
-        firstLink = $("a").first();             //document.querySelector("a");
-        currentLeftValue = 0;
+    
+    id = requestAnimationFrame(() => {
+        firstLink = $("a").eq(0); //document.querySelector("a");
+        if (headlines.offset().left + firstLink.outerWidth() < 0) {
+            headlines.remove(firstLink); //headlines.removeChild(firstLink);
+            headlines.append(firstLink); //headlines.appendChild(firstLink);
+
+            currentLeftValue = 0;
+            headlines.css({ left: currentLeftValue + "px" }); // ???
+            //headlines.style.left = currentLeftValue + "px";
+        }
+
         headlines.css({ left: currentLeftValue + "px" }); // ???
         //headlines.style.left = currentLeftValue + "px";
-    }
-    id = requestAnimationFrame(() => {
-        headlines.css({left: currentLeftValue + "px",}); // ???
-        //headlines.style.left = currentLeftValue + "px";
-        currentLeftValue -= 1.5;
+        currentLeftValue -= 3;
         moveLeft();
     });
 }
@@ -36,7 +39,6 @@ $("a")
     .on("mouseenter", function () {
         console.log("mouseenter");
         cancelAnimationFrame(id);
-        
     })
     .on("mouseleave", function () {
         console.log("mouseleave");
