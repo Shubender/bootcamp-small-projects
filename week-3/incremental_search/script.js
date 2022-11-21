@@ -2,14 +2,15 @@
     var len = countries.length;
     var input = $("input");
     var results = $("#results");
-
+    let filteredCountries;
     var lowerCaseCountries = countries.map(function (country) {
         return country.toLowerCase();
     });
     //console.log('lowerCaseCountries:', lowerCaseCountries);
 
     let inputResult;
-
+    let countArrowDown = 0;
+    let countArrowUp = 4;
 
     //need global index
     //change style - add class, remove class
@@ -33,8 +34,33 @@
         // not needed yet
         .on("keydown", function (e) {
             // this is gonna be implemented later
-            // this is to navigate via arrow keys
-            e.keyCode
+            // this is to navigate via arrow keys 40 and 38
+            
+            if (e.keyCode === 40) {
+                //console.log("arrow down");
+                console.log("countArrowDown: ", countArrowDown);
+                results.children().eq(countArrowDown - 1).removeClass("arrowOn");
+                results.children().eq(countArrowDown).addClass("arrowOn");
+                countArrowDown++;
+                if (countArrowDown === 4) {
+                    countArrowDown = 0;
+                    //results.children().eq(countArrow - 1).removeClass("arrowOn");
+                }
+                countArrowUp = countArrowDown - 1;
+            }
+            if (e.keyCode === 38) {
+                //console.log("arrow up");
+                console.log("countArrowUp: ", countArrowUp);
+                results.children().eq(countArrowUp).removeClass("arrowOn");
+                results.children().eq(countArrowUp - 1).addClass("arrowOn");
+                countArrowUp--;
+                if (countArrowUp < 0) {
+                    results.children().eq(0).removeClass("arrowOn");
+                    results.children().eq(3).addClass("arrowOn");
+                    countArrowUp = 3;
+                }
+                countArrowDown = countArrowUp + 1;
+            }
         });
 
     // gets the value from the input field
@@ -54,11 +80,22 @@
     // returns an array
     function findResults(str) {
         // TODO:
-        let filteredCountries = lowerCaseCountries.filter((el) =>
+        filteredCountries = lowerCaseCountries.filter((el) =>
             el.startsWith(str));
-        if (str === ''){filteredCountries = [];}
+        filteredCountries = capitalizeWords(filteredCountries);
+        if (str === '') {
+            filteredCountries = [];
+        }
         console.log("filteredCountries:", filteredCountries);
         return filteredCountries;
+    }
+
+    function capitalizeWords(arr) {
+        return arr.map((element) => {
+            return (
+                element.charAt(0).toUpperCase() + element.slice(1).toLowerCase()
+            );
+        });
     }
 
     // gets an array
