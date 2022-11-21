@@ -1,5 +1,5 @@
 (function (countries) {
-    var len = countries.length;
+    //var len = countries.length;
     var input = $("input");
     var results = $("#results");
     let filteredCountries;
@@ -9,8 +9,7 @@
     //console.log('lowerCaseCountries:', lowerCaseCountries);
 
     let inputResult;
-    let countArrowDown = 0;
-    let countArrowUp = 4;
+    let countArrow = 0;
 
     //need global index
     //change style - add class, remove class
@@ -36,30 +35,35 @@
             // this is gonna be implemented later
             // this is to navigate via arrow keys 40 and 38
             
-            if (e.keyCode === 40) {
+            if (e.keyCode === 40) {                         //jump to second position at first time!!!
                 //console.log("arrow down");
-                console.log("countArrowDown: ", countArrowDown);
-                results.children().eq(countArrowDown - 1).removeClass("arrowOn");
-                results.children().eq(countArrowDown).addClass("arrowOn");
-                countArrowDown++;
-                if (countArrowDown === 4) {
-                    countArrowDown = 0;
-                    //results.children().eq(countArrow - 1).removeClass("arrowOn");
+                countArrow++;
+                if (countArrow > 3) {
+                    countArrow = 3;
+                    return;
                 }
-                countArrowUp = countArrowDown - 1;
-            }
+                console.log("countArrow: ", countArrow);
+                results.children().eq(countArrow).addClass("arrowOn");
+                results.children().eq(countArrow - 1).removeClass("arrowOn");
+                
+            } else 
+
             if (e.keyCode === 38) {
                 //console.log("arrow up");
-                console.log("countArrowUp: ", countArrowUp);
-                results.children().eq(countArrowUp).removeClass("arrowOn");
-                results.children().eq(countArrowUp - 1).addClass("arrowOn");
-                countArrowUp--;
-                if (countArrowUp < 0) {
-                    results.children().eq(0).removeClass("arrowOn");
-                    results.children().eq(3).addClass("arrowOn");
-                    countArrowUp = 3;
+                countArrow--;
+                if (countArrow < 0) {
+                    countArrow = 0;
+                    return; 
                 }
-                countArrowDown = countArrowUp + 1;
+                console.log("countArrowUp: ", countArrow);
+                results.children().eq(countArrow + 1).removeClass("arrowOn");
+                results.children().eq(countArrow).addClass("arrowOn");
+                
+            }
+
+            if (e.keyCode === 13) {
+                //need to get outerText from 1 results
+                //console.log(e.eq(countArrow)); ???
             }
         });
 
