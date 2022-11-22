@@ -1,27 +1,21 @@
 (function () {
-    //var len = countries.length;
     var input = $("input");
     var results = $("#results");
-    let filteredCountries;
-    // var lowerCaseCountries = countries.map(function (country) {
-    //     return country.toLowerCase();
-    // });
-    //console.log('lowerCaseCountries:', lowerCaseCountries);
-
     let inputResult;
-    let countArrow = 0;
-
-    //need global index
-    //change style - add class, remove class
-    //
+    let countArrow = -1;
+    let countryCount;
+    //let hack = 0;
+    let timeout;
 
     input
         .on("input", function () {
             // we pass the value from the input field
             inputResult = input.val().toLowerCase();
-            findAndShowResults(inputResult);
+            clearTimeout(timeout);
+            timeout = setTimeout(function () {
+                findAndShowResults(inputResult);
+            }, 250);
             //console.log("inputResult:", inputResult);
-            results.children().eq(countArrow).addClass("arrowOn");
         })
         .on("focus", function () {
             // show the results
@@ -37,26 +31,25 @@
             // this is to navigate via arrow keys 40 and 38
             
             if (e.keyCode === 40) {                         //jump to second position at first time!!!  
-                input.val(results.children().eq(countArrow).text());
                 countArrow++;
-                if (countArrow > 3) {
-                    countArrow = 3;
+                if (countArrow === countryCount) {
+                    countArrow = countryCount - 1;
                     return;
                 }
                 console.log("countArrow: ", countArrow);
+                input.val(results.children().eq(countArrow).text());
                 results.children().eq(countArrow).addClass("arrowOn");
                 results.children().eq(countArrow - 1).removeClass("arrowOn");
                 
-            } else 
-
+            } 
+            
             if (e.keyCode === 38) {
-                //console.log("arrow up");
-                input.val(results.children().eq(countArrow).text());
                 countArrow--;
                 if (countArrow < 0) {
                     countArrow = 0;
                     return; 
                 }
+                input.val(results.children().eq(countArrow).text());
                 console.log("countArrowUp: ", countArrow);
                 results.children().eq(countArrow + 1).removeClass("arrowOn");
                 results.children().eq(countArrow).addClass("arrowOn");
@@ -93,43 +86,22 @@
                 console.log("$data", data);
                 console.log("$value", $value);
                 console.log('$("input").val()', $("input").val());
-                //check if $value is the same as what is currently in the input field
-                // if not ...return early?
-                filteredCountries = data;
-                renderResults(data);
-                if (data === 0) {
-                    results.hide();
-                }
-                if (data === []) {
-                    results.hide();
-                }
+                if ($value === inputResult) {
+                    //console.log('ALL IS OK!');
+                    renderResults(data);
+                } 
+                // if (data === 0) {
+                //     results.hide();
+                // }
+                // if (data === []) {
+                //     results.hide();
+                // }
+                countryCount = data.length;
+                console.log("countryCount", countryCount);
             },
         });
         //renderResults(filteredCountries);
     }
-
-    // this filters the array of countries
-    // gets a string
-    // returns an array
-    // function findResults(str) {
-    //     // TODO:
-    //     filteredCountries = lowerCaseCountries.filter((el) =>
-    //         el.startsWith(str));
-    //     filteredCountries = capitalizeWords(filteredCountries);
-    //     if (str === '') {
-    //         filteredCountries = [];
-    //     }
-    //     console.log("filteredCountries:", filteredCountries);
-    //     return filteredCountries;
-    // }
-
-    // function capitalizeWords(arr) {
-    //     return arr.map((element) => {
-    //         return (
-    //             element.charAt(0).toUpperCase() + element.slice(1).toLowerCase()
-    //         );
-    //     });
-    // }
 
     // gets an array
     // shows the results using getResultsHtml()
