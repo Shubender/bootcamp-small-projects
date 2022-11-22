@@ -21,22 +21,30 @@
             inputResult = input.val().toLowerCase();
             findAndShowResults(inputResult);
             console.log("inputResult:", inputResult);
+            results.children().eq(countArrow).addClass("arrowOn");
         })
         .on("focus", function () {
             // show the results
             results.show();
         })
-        .on("blur", function () {
-            // hide the results
-            results.hide();
-        })
-        // not needed yet
+        // .on("blur", function () {                        //work not correctly!!!
+        //     // hide the results
+        //     results.hide();
+        // })
+
         .on("keydown", function (e) {
             // this is gonna be implemented later
             // this is to navigate via arrow keys 40 and 38
             
             if (e.keyCode === 40) {                         //jump to second position at first time!!!
                 //console.log("arrow down");
+                // if (countArrow === 0) {
+                //     results.children().eq(countArrow).addClass("arrowOn");
+                //     countArrow++;
+                //     return;
+                // }
+                
+                input.val(results.children().eq(countArrow).text());
                 countArrow++;
                 if (countArrow > 3) {
                     countArrow = 3;
@@ -50,6 +58,7 @@
 
             if (e.keyCode === 38) {
                 //console.log("arrow up");
+                input.val(results.children().eq(countArrow).text());
                 countArrow--;
                 if (countArrow < 0) {
                     countArrow = 0;
@@ -58,7 +67,6 @@
                 console.log("countArrowUp: ", countArrow);
                 results.children().eq(countArrow + 1).removeClass("arrowOn");
                 results.children().eq(countArrow).addClass("arrowOn");
-                
             }
 
             if (e.keyCode === 13) {
@@ -66,6 +74,13 @@
                 //console.log(e.eq(countArrow)); ???
             }
         });
+
+    results.
+        on("click", function (e) {
+            input.val(e.target.outerText);
+            console.log(e.target.outerText);
+            results.hide();
+        });    
 
     // gets the value from the input field
     // if there is no value -> hides the results
