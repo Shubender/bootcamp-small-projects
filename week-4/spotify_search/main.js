@@ -24,7 +24,7 @@ button.addEventListener("click", () => {
             const items = results.items;
             //save value of results.next to nextUrl;
             nextUrl = results.next;
-            console.log("nextUrl:", nextUrl);
+            console.log("First nextUrl:", nextUrl);
             itemsAdj = items.map((item) => {
                 return { name: item.name, image: item.images[1]?.url };
             });
@@ -42,7 +42,6 @@ function renderHTML(itemsAdj, shouldAppend) {
     if (!shouldAppend) {
         htmlString = "";
     }
-     
 
     for (let i = 0; i < itemsAdj.length; i++) {
         if (itemsAdj[i].image) {
@@ -74,6 +73,7 @@ secondButton.addEventListener("click", () => {
             const items = results.items;
             //save value of results.next to nextUrl;
             nextUrl = results.next;
+            console.log("Second nextUrl:", nextUrl);
             itemsAdj = items.map((item) => {
                 return { name: item.name, image: item.images[1]?.url };
             });
@@ -85,4 +85,44 @@ secondButton.addEventListener("click", () => {
             console.log("Error:", error);
         },
     });
+});
+
+let timeout;
+
+document.addEventListener("scroll", () => {
+    clearTimeout(timeout);
+
+    timeout = setTimeout(() => {
+        if (
+            document.body.clientHeight - window.scrollY <
+            window.innerHeight + 200
+        ) {
+            // calculation with scrollY, clientHeight and innerHeight
+            console.log("Scroll End");
+            $.ajax({
+                url: nextUrl,
+                success: function (data) {
+                    const results = data.artists || data.albums;
+                    const items = results.items;
+                    //save value of results.next to nextUrl;
+                    nextUrl = results.next;
+                    console.log("Auto nextUrl:", nextUrl);
+                    itemsAdj = items.map((item) => {
+                        return { name: item.name, image: item.images[1]?.url };
+                    });
+                    // console.log(itemsAdj);
+                    // console.log(itemsAdj[0].name);
+
+                    renderHTML(itemsAdj, true);
+                },
+                error: function (error) {
+                    console.log("Error:", error);
+                },
+            });
+        }
+    }, 250);
+
+    // console.log('scrollY: ', window.scrollY);
+    // console.log('clientHeight: ', document.body.clientHeight);
+    // console.log('inner height: ', window.innerHeight);
 });
