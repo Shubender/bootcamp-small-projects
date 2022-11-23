@@ -81,7 +81,7 @@ document.addEventListener("scroll", () => {
                     var artistHtml = Handlebars.templates.resultTemplate({
                         itemsAdj,
                     });
-                    artistsSection.innerHTML = artistHtml;
+                    artistsSection.innerHTML += artistHtml;
                 },
                 error: function (error) {
                     console.log("Error:", error);
