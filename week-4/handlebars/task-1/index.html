@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Handlebars</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+
+<body>
+  <section id="students-section" class="cards-section"></section>
+
+  <script id="studentsTemplate" type="text/x-handlebars-template">
+            <h1>Authors:</h1>
+            <div class="card-container">
+                {{#authors}}
+                    <div class="card">
+                        <img src={{photo}} />
+                        <div class="card-info">
+                            <h2>{{name}}</h2>
+                            <h3>Born: {{born}}</h3>
+                            <h3>Died: {{died}}</h3>
+                            <h3>Quote: {{quote}}</h3>
+                            <div class="wand-container">
+                                <p class="wand-title">Books:</p>
+                                <div>
+                                    <!-- We loop through our wand key property -->
+                                    {{#selectedWritings}}
+                                        <p>{{this}}</p>
+                                    {{/selectedWritings}}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                {{/authors}}
+            </div>
+        </script>
+</body>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.7.7/handlebars.min.js"></script>
+<script src="./script.js"></script>
+
+</html>
