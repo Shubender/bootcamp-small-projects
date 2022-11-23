@@ -5,16 +5,17 @@ const secondButton = document.querySelector(".second-button");
 const resultContainer = document.querySelector(".resultContainer");
 
 let htmlString = "";
-let nextUrl = '';
+let nextUrl = "";
+let itemsAdj = [];
 
-button.addEventListener('click', () => {
+button.addEventListener("click", () => {
     console.log("Input:", input.value);
     console.log("select:", select.value);
     $.ajax({
         url: "https://spicedify.herokuapp.com/spotify",
         data: {
             q: input.value,
-            type: select.value
+            type: select.value,
         },
         success: function (data) {
             console.log("Data:", data);
@@ -24,23 +25,12 @@ button.addEventListener('click', () => {
             //save value of results.next to nextUrl;
             nextUrl = results.next;
             console.log("nextUrl:", nextUrl);
-            const itemsAdj = items.map((item) => {
+            itemsAdj = items.map((item) => {
                 return { name: item.name, image: item.images[1]?.url };
             });
-            console.log(itemsAdj);
-            console.log(itemsAdj[0].name);
-
-            for (let i = 0; i < itemsAdj.length; i++) {
-                htmlString +=
-                    "<div>" +
-                    itemsAdj[i].name +
-                    "</div>" +
-                    '<img src="' +
-                    itemsAdj[i].image +
-                    '">';
-                //console.log(htmlStringName);
-            }
-            resultContainer.innerHTML = htmlString;
+            // console.log(itemsAdj);
+            // console.log(itemsAdj[0].name);
+            renderHTML(itemsAdj, false);
         },
         error: function (error) {
             console.log("Error:", error);
@@ -48,45 +38,48 @@ button.addEventListener('click', () => {
     });
 });
 
-// additional eventL for new button
-    // we will make a new $ajax request based on our global nextUrl
-// 
+function renderHTML(itemsAdj, shouldAppend) {
+    if (!shouldAppend) {
+        htmlString = "";
+    }
+     
+
+    for (let i = 0; i < itemsAdj.length; i++) {
+        if (itemsAdj[i].image) {
+            htmlString +=
+                "<div>" +
+                itemsAdj[i].name +
+                "</div>" +
+                '<img src="' +
+                itemsAdj[i].image +
+                '">';
+        } else {
+            htmlString +=
+                "<div>" +
+                itemsAdj[i].name +
+                "</div>" +
+                '<img src="./no-img.jpg">';
+        }
+    }
+
+    resultContainer.innerHTML = htmlString;
+}
 
 secondButton.addEventListener("click", () => {
-    console.log("Input:", input.value);
-    console.log("select:", select.value);
     $.ajax({
-        // https://spicedify.herokuapp.com/spotify?query=depesh&type=artist&offset=20&limit=20
         url: nextUrl,
-        // url: "https://spicedify.herokuapp.com/spotify?query=depesh&type=artist&offset=20&limit=20",
-        // data: {
-        //     q: input.value,
-        //     type: select.value,
-        // },
         success: function (data) {
-            console.log("Data:", data);
-
+            console.log("Data 2:", data);
             const results = data.artists || data.albums;
             const items = results.items;
             //save value of results.next to nextUrl;
-            const itemsAdj = items.map((item) => {
+            nextUrl = results.next;
+            itemsAdj = items.map((item) => {
                 return { name: item.name, image: item.images[1]?.url };
             });
-            console.log(itemsAdj);
-            console.log(itemsAdj[0].name);
-            //let htmlString = "";
-
-            for (let i = 0; i < itemsAdj.length; i++) {
-                htmlString +=
-                    "<div>" +
-                    itemsAdj[i].name +
-                    "</div>" +
-                    '<img src="' +
-                    itemsAdj[i].image +
-                    '">';
-                //console.log(htmlStringName);
-            }
-            resultContainer.innerHTML = htmlString;
+            // console.log(itemsAdj);
+            // console.log(itemsAdj[0].name);
+            renderHTML(itemsAdj, true);
         },
         error: function (error) {
             console.log("Error:", error);
