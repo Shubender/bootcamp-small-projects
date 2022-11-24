@@ -26,7 +26,11 @@
             <div class="artistContainer">
                 {{#itemsAdj}}
                     <div class="card">
-                        <img src={{image}} />
+                        {{#if image}}
+                        <img src={{image}}>
+                        {{else}}
+                        <img src="./no-img.jpg">
+                        {{/if}}
                         <div class="card-info">
                             <h2>{{name}}</h2>
                         </div>
