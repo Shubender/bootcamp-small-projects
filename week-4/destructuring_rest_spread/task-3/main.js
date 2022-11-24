@@ -11,16 +11,7 @@
 //  }
 
 function logInfo(city) {
-    // const name = city.name;
-    // const country = city.country;
-    // const numPeople = city.population;
-
-    const [name, country, numPeople] = [
-        city.name,
-        city.country,
-        city.population,
-    ];
-
+    const { name, country, population: numPeople } = city;
     console.log(
         `${name} is in ${country} and has ${numPeople} inhabitants in it.`
     );
