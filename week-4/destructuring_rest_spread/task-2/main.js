@@ -13,7 +13,7 @@ let newArr;
 
 function addArr(arr1, arr2) {
     return (newArr = [...arr1, ...arr2]);
-};
+}
 
 const firstArr = [1, 3, 7, 4, 5];
 const secondArr = [2, 8, 1, 5, 7];
