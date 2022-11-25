@@ -39,6 +39,7 @@ let currentQuestion = story.q;
 let currentAnswers = story.answers;
 
 function askQuestion(question, answers) {
+    question = chalk.keyword(color)(question);
     rl.question(question, function (input) {
         // determine if the user input is valid
         if (!answers[input]) {
