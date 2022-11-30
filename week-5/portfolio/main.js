@@ -1,6 +1,7 @@
 const http = require("http");
 const fs = require("fs");
 const path = require("path"); // use path.join() for concatenating paths
+const generateProjects = require("./generate-projects");
 
 const contentTypes = {
     ".html": "text/html",
@@ -34,7 +35,9 @@ const server = http.createServer((req, res) => {
     // 2. Check if req.url is '/'. If it is. Do nothing FOR NOW. We will implement later for part 2
 
     if (req.url === "/") {
-        res.end("Do homepage");
+        const finalHtml = generateProjects();
+        res.setHeader("content-type", "text/html");
+        res.end(finalHtml);
     } 
 
     // 3. Check if req.url is NOT '/'. If it is not '/' then do additional logic
@@ -78,7 +81,7 @@ const server = http.createServer((req, res) => {
                     // make a redirect to req.url + '/'
                     res.setHeader("Location", req.url + '/');
                     res.statusCode = 307;
-                    res.end('do the redirect');
+                    res.end();
                 }
             }
             
