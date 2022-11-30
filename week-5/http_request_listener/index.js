@@ -1,5 +1,6 @@
 const http = require("http");
 const fs = require("fs");
+const path = require("path");
 const PORT = 8080;
 
 const server = http.createServer((request, response) => {
@@ -11,16 +12,13 @@ const server = http.createServer((request, response) => {
     // console.log("request.headers: ", request.headers);
 
     if (request.url === "/requests.txt") {
-            response.setHeader("content-type", "text/html");
-            response.statusCode = 200;
-            response.write(`<!doctype html>
-                    <html>
-                    <title>My requests</title>
-                    <p></p>
-                    </html>
-                `);
-                response.end();
-
+        response.setHeader("content-type", "text/plain");
+        const pathToCheck = path.join(__dirname, request.url);
+        const fileContent = fs.readFileSync(pathToCheck);
+        response.statusCode = 200;
+        response.end(fileContent);
+    }
+               
 
     if (request.method === "GET" || request.method === "HEAD") {
         if (request.url === "/") {
