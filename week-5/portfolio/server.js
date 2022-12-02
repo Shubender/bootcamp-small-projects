@@ -3,6 +3,7 @@ const fs = require("fs");
 const path = require("path"); // use path.join() for concatenating paths
 const generateProjects = require("./generate-projects");
 
+
 const contentTypes = {
     ".html": "text/html",
     ".css": "text/css",

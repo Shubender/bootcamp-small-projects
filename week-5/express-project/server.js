@@ -2,6 +2,7 @@ const express = require("express");
 const path = require("path");
 const app = express();
 const generateProjects = require("./generate-projects");
+const { auth } = require("./auth.js");
 const cookieParser = require("cookie-parser");
 
 let userReq = "";
@@ -21,6 +22,7 @@ app.use((req, res, next) => {
         next();
     } else {
         if (req.cookies.accepted === "on") {
+            // res.redirect("/");
             next();
         } else {
             // save information about initial request in a global variable
@@ -29,6 +31,12 @@ app.use((req, res, next) => {
             res.redirect("/cookies/");
         }
     }
+});
+
+// app.use('/ticker', auth); // its also work the same way
+
+app.get("/ticker", auth, (req, res, next) => {
+    next();
 });
 
 // middleware to serve static files from a specific folder
@@ -40,11 +48,14 @@ app.get("/", (req, res) => {
     res.send(finalHtml);
 });
 
+
+
 // middleware to encoding the body of a POST request
 const urlEncodedMiddleware = express.urlencoded({ extended: false });
 app.use(urlEncodedMiddleware);
 
 app.get("/cookies", (req, res) => {
+    // res.redirect(userReq);
     res.sendFile(path.join(__dirname, "/cookies", "index.html"));
 });
 
