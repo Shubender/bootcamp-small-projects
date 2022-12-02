@@ -1,0 +1,26 @@
+[
+    {
+        "path": "connect-four",
+        "name": "Connect Four"
+    },
+    {
+        "path": "kitty-carousel",
+        "name": "Kitty Carousel"
+    },
+    {
+        "path": "spotify-search",
+        "name": "Spotify Search"
+    },
+    {
+        "path": "html-css-lab",
+        "name": "Html Css Lab"
+    },
+    {
+        "path": "ticker",
+        "name": "Ticker"
+    },
+    {
+        "path": "panels",
+        "name": "Panels"
+    }
+]
