@@ -20,6 +20,7 @@ app.get("/", (req, res) => {
     res.render("projects", {
         layout: "main",
         projects,
+        cohortName
     });
 });
 
