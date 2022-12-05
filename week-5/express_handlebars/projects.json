@@ -1,26 +1,32 @@
 [
     {
         "path": "connect-four",
-        "name": "Connect Four"
+        "name": "Connect Four",
+        "description": "Put one color coins in horizontal/vertical or diagonal lines."
     },
     {
         "path": "kitty-carousel",
-        "name": "Kitty Carousel"
+        "name": "Kitty Carousel",
+        "description": "Gallery of cute kitties."
     },
     {
         "path": "spotify-search",
-        "name": "Spotify Search"
+        "name": "Spotify Search",
+        "description": "Simply search in Spotify database."
     },
     {
         "path": "html-css-lab",
-        "name": "Html Css Lab"
+        "name": "Html Css Lab",
+        "description": "Some not very fancy site."
     },
     {
         "path": "ticker",
-        "name": "Ticker"
+        "name": "Ticker",
+        "description": "Dynamic line with news."
     },
     {
         "path": "panels",
-        "name": "Panels"
+        "name": "Panels",
+        "description": "Before and after tool."
     }
 ]

@@ -1,7 +1,9 @@
-{{#projects}}
-<div>
-    <a href="{{path}}"><img src="/{{path}}/screenshot.png"></a>
-    {{!-- <img src="/{{path}}/screenshot.png" /> --}}
-    <h3><a href="{{path}}">{{name}}</a></h3>
-</div>
-{{/projects}}
+{{!-- TASK for later: move projects loop into own partials handlebars file --}}
+{{!-- showImage variable was provided next to projects variable --}}
+
+{{> allprojects}}
+
+{{!-- TASK for later: move selectedProject info into own partials handlebars file --}}
+
+{{> selectedproject}}
+

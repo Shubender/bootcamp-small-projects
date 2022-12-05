@@ -1,0 +1,21 @@
+{{#if showImage}}
+    <section class="allProjects">
+    {{#projects}}
+        <div>
+        <a href="project/{{path}}"><img class="small-img" src="/{{path}}/screenshot.png"></a>
+        <h3><a href="project/{{path}}">{{name}}</a></h3>
+        </div>
+    {{/projects}}
+    </section>  
+{{else}}
+    <ul>
+        {{#projects}}
+        <li>
+            <a href="{{path}}">{{toUpperCase name}}</a>
+        </li>
+        {{/projects}}
+    </ul>
+    <form action="../">
+        <button type="submit">Main page</button>
+    </form>
+{{/if}}
