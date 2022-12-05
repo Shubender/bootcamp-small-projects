@@ -32,23 +32,27 @@ app.get('/project/:projectDirectory', (req, res) => {
     const selectedProject = projects.find((p) => {
         return p.path === projectDirectory;
     });
-    // console.log("selectedProject:", selectedProject);
-
+    
     // TASK: check if selectedProject is undefined.
     //      if it is undefined. set statuscode 404 and send response.
     if (!selectedProject) {
         res.statusCode = 404;
         res.end();
     }
-    
+
+    console.log("selectedProject:", selectedProject.path);
+    console.log("projects:", projects.path);
+
     res.render("projects", {
-        projects,
+        projects: projects,
         showImage: false,
         selectedProject: selectedProject,
         cohortName,
         helpers: {
-            toUpperCase(text) {
-                return text.toUpperCase();
+            colorChange(text) {
+                if (selectedProject.name === text) {
+                    return 'colored';
+                }
             },
         },
     });
