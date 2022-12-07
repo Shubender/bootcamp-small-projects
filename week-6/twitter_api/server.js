@@ -4,8 +4,7 @@ const app = express();
 require("dotenv").config();
 app.use(express.static("./projects"));
 
-const {getToken, getTweets} = require("./twitter");
-
+const { getToken, getTweets } = require("./twitter");
 
 // 1. get a Bearer Token by making a POST request with encoded Key and Secret
 
@@ -27,9 +26,14 @@ function filterTweets(tweets) {
         return tweet.entities.urls.length === 1;
     });
 
-    const newTweets = filteredTweets.map(tweet => {
-       // TASK for later: move urls from text
-         return { text: tweet.full_text.slice(0, -24), url: tweet.entities.urls[0].url };
+    const sortedTweets = filteredTweets.sort((a, b) => (a.name < b.name ? 1 : -1));
+
+    const newTweets = sortedTweets.map((tweet) => {
+        return {
+            name: tweet.user.name,
+            text: tweet.full_text.slice(0, -24),
+            url: tweet.entities.urls[0].url,
+        };
     });
     return newTweets;
 }
@@ -39,13 +43,19 @@ function filterTweets(tweets) {
 app.get("/links.json", (req, res) => {
     getToken()
         .then((token) => {
-            return getTweets(token);
+            return Promise.all([
+                getTweets(token, "nytimes"),
+                getTweets(token, "washingtonpost"),
+                getTweets(token, "FAZ_NET"),
+            ]);
         })
         .then((tweets) => {
-            const filteredTweets = filterTweets(tweets);
+            const flatTweets = tweets.flat();
+            const filteredTweets = filterTweets(flatTweets);
             res.json(filteredTweets);
         })
         .catch((error) => {
+            console.log(error);
             res.sendStatus(500);
         });
 });

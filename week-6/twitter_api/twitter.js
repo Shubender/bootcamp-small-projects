@@ -45,12 +45,13 @@ module.exports.getToken = () => {
     });
 };
 
-module.exports.getTweets = (token) => {
+module.exports.getTweets = (token, screen_name) => {
     return new Promise((resolve, reject) => {
         const req = https.request({
             method: "GET",
             host: "api.twitter.com",
-            path: "/1.1/statuses/user_timeline.json?count=20&screen_name=nytimes&tweet_mode=extended",
+            // path: `/1.1/statuses/user_timeline.json?count=20&tweet_mode=extended&screen_name=nytimes`,
+            path: `/1.1/statuses/user_timeline.json?count=7&tweet_mode=extended&screen_name=${screen_name}`,
             headers: {
                 Authorization: `Bearer ${token}`,
             },
@@ -64,7 +65,7 @@ module.exports.getTweets = (token) => {
             });
             res.on("end", () => {
                 const dataJson = JSON.parse(data);
-                console.log("Response for getting Tweets: ");
+                // console.log("Response for getting Tweets: ", dataJson[0]);
                 resolve(dataJson);
                 // callback(null, dataJson);
             });

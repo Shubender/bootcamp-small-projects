@@ -1,6 +1,4 @@
-
-
-$(function (){
+$(function () {
     // console.log("TEST");
     $.get("/links.json", function (data) {
         data.forEach((tickerElement) => {
@@ -8,6 +6,10 @@ $(function (){
                 '<a href="' +
                     tickerElement.url +
                     '"target="_blank">' +
+                    "<b>" +
+                    tickerElement.name +
+                    "</b>" +
+                    ": " +
                     tickerElement.text +
                     "</a>"
             );
@@ -52,10 +54,7 @@ function moveLeft() {
     });
 }
 
-// TODO: stop and run not work
-
-$("a")
-    .on("mouseenter", function () {
+ticker.on("mouseenter", function () {
         // console.log("mouseenter");
         cancelAnimationFrame(id);
     })
