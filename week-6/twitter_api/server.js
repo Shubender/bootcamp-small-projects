@@ -9,12 +9,8 @@ const {getToken, getTweets} = require("./twitter");
 
 // 1. get a Bearer Token by making a POST request with encoded Key and Secret
 
-
-
 // TASK: implement logic for actual GET-Request for getting Tweets. See getToken() function for analogy
 // 2. get the Tweets by making a GET request with Bearer Token
-
-
 
 // 3. filter & format/simplify tweets
 
@@ -33,7 +29,7 @@ function filterTweets(tweets) {
 
     const newTweets = filteredTweets.map(tweet => {
        // TASK for later: move urls from text
-         return { text: tweet.full_text, url: tweet.entities.urls[0].url };
+         return { text: tweet.full_text.slice(0, -24), url: tweet.entities.urls[0].url };
     });
     return newTweets;
 }
@@ -41,23 +37,17 @@ function filterTweets(tweets) {
 // 4. respond to the client with the filtered/formatted tweets
 
 app.get("/links.json", (req, res) => {
-    getToken((error, token) => {
-        // console.log("token: ", token);
-
-        // TASK: Check for error
-        //      - send back empty JSON if there is an error
-
-        getTweets(token, (error, tweets) => {
-            // console.log("tweets: ", tweets);
-            // TASK: Check for error
-            //      - send back empty JSON if there is an error
+    getToken()
+        .then((token) => {
+            return getTweets(token);
+        })
+        .then((tweets) => {
             const filteredTweets = filterTweets(tweets);
-            // console.log("filteredTweets: ", filteredTweets);
-
-            // TASK: send response back with filteredTweets as JSON (use res.json());
             res.json(filteredTweets);
+        })
+        .catch((error) => {
+            res.sendStatus(500);
         });
-    });
 });
 
 app.listen(8080, () => {
