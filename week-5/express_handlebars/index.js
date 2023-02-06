@@ -40,8 +40,8 @@ app.get('/project/:projectDirectory', (req, res) => {
         res.end();
     }
 
-    console.log("selectedProject:", selectedProject.path);
-    console.log("projects:", projects.path);
+    // console.log("selectedProject:", selectedProject.path);
+    // console.log("projects:", projects.path);
 
     res.render("projects", {
         projects: projects,

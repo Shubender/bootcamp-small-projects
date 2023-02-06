@@ -72,6 +72,8 @@ function moveLeft() {
     });
 }
 
+// TODO: stop and run not work
+
 $("a")
     .on("mouseenter", function () {
         console.log("mouseenter");
